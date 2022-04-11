@@ -70,7 +70,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Zen App",
             // inject: false,
-            template: path.resolve("src", "index.html"),
+            template: path.resolve("src", "public", "index.html"),
             // filename: 'index.[contenthash].html',
             minify: true,
             meta: {
