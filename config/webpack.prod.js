@@ -2,12 +2,18 @@ const WebpackObfuscator = require('webpack-obfuscator');
 const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require("path");
 const styleConfig = require("./webpack.styles");
+const crypto = require("crypto");
+
+const isAnalyze = process.argv.includes("--analyze");
+const isHash = process.argv.includes("--hash");
+const hash = isHash ? crypto.randomBytes(3).toString("hex") : "[fullhash:8]";
 
 module.exports = merge(common, {
     mode: "production",
@@ -21,8 +27,8 @@ module.exports = merge(common, {
     },
     output: {
         clean: true,
-        filename: "static/js/[name].[fullhash:8].js",
-        chunkFilename: 'static/js/[name].[fullhash:8].chunk.js',
+        filename: `static/js/[name].${hash}.js`,
+        chunkFilename: `static/js/[name].${hash}.chunk.js`,
     },
     resolve: {
         alias: {
@@ -105,16 +111,10 @@ module.exports = merge(common, {
                     test: /[\\/]node_modules[\\/]/,
                     // cacheGroupKey here is `commons` as the key of the cacheGroup
                     name(module, chunks, cacheGroupKey) {
-                        const moduleFileName = module
-                            .identifier()
-                            .split('/')
-                            .reduceRight((item) => item);
-                        // Dependent chunk name
                         const moduleName = module.identifier()
                             .split("/node_modules/").pop().replace(/@/g, "").replace(/\//g, "~");
                         // .split("/node_modules/").pop().replace(/@|\.js|\.min\.js/g, "").replace(/\//g, "~")
-                        const allChunksNames = chunks.map((item) => item.name).join('~');
-                        console.log(moduleName);
+                        console.log("Compiling", moduleName);
                         return `deps/${moduleName}`;
                     },
                     chunks: 'all'
@@ -140,16 +140,27 @@ module.exports = merge(common, {
             new CssMinimizerPlugin(),
         ]
     },
-    plugins: [
+    plugins: isAnalyze ? [
+        ...getPlugins(),
+        new webpack.ProgressPlugin(),
+        new BundleAnalyzerPlugin({
+            analyzerHost: "localhost",
+            analyzerPort: 3002,
+            reportFilename: "./report.html"
+        })
+    ] : getPlugins()
+});
+
+function getPlugins() {
+    return [
         new MiniCssExtractPlugin({
             ignoreOrder: true,
             linkType: "text/css",
             // filename: "[name].[fullhash].css",
             // chunkFilename: "[id].[fullhash].css",
-            filename: "static/css/[name].[fullhash:8].css",
-            chunkFilename: 'static/css/[name].[fullhash:8].chunk.css',
+            filename: `static/css/[name].${hash}.css`,
+            chunkFilename: `static/css/[name].${hash}.chunk.css`,
         }),
-        new webpack.ProgressPlugin(),
         new webpack.ProvidePlugin({
             ...styleConfig.cssGlobalProviders,
             React: 'preact/compat',
@@ -167,5 +178,5 @@ module.exports = merge(common, {
         //     clientsClaim: true,
         //     skipWaiting: true,
         // }),
-    ]
-});
+    ];
+}

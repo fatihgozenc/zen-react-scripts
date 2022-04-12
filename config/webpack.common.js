@@ -70,7 +70,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             title: "Zen App",
             // inject: false,
-            template: path.resolve("src", "public", "index.html"),
+            template: path.resolve("public", "index.html"),
             // filename: 'index.[contenthash].html',
             minify: true,
             meta: {
@@ -91,8 +91,13 @@ module.exports = {
         new CopyWebpackPlugin({
             patterns: [
                 {
-                    from: "./src/public",
-                    to: "./public"
+                    from: "./public",
+                    to: "./public",
+                    globOptions: {
+                        ignore: [
+                            "**/*.html",
+                        ],
+                    },
                 }
             ],
         }),
