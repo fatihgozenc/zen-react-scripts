@@ -6,7 +6,9 @@ const EventEmitter = require('events');
 const LOCAL_BUILD_URL = "http://localhost:3001/index.html";
 const startTime = Date.now();
 
-const Builder = spawn(process.argv[0], [__dirname + "/build.js"], {
+const args = process.argv.slice(2);
+
+const Builder = spawn(process.argv[0], [__dirname + "/build.js", ...args], {
     detached: true,
     stdio: 'inherit'
 });
@@ -21,7 +23,6 @@ Events.on('build_end', () => {
         root: './build',
         fallback: './build/index.html',
         module: false,
-        inject: `<script>window.location.href="http://localhost:3001/index.html"</script>`,
         static: true,
         credentials: null,
         port: 3001,

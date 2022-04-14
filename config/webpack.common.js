@@ -1,10 +1,9 @@
 const path = require("path");
-const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
-const HtmlWebpackDeployPlugin = require("html-webpack-deploy-plugin");
+const InterpolateHtmlPlugin = require("@gozenc/interpolate-html-plugin");
 
 module.exports = {
     entry: {
@@ -51,7 +50,9 @@ module.exports = {
                             /node_modules[\\\/]webpack[\\\/]buildin/,
                         ],
                         presets: ["@babel/preset-react"],
-                        plugins: ["@babel/plugin-transform-runtime"]
+                        plugins: [
+                            "@babel/plugin-transform-runtime"
+                        ]
                     }
                 }
             },
@@ -69,25 +70,16 @@ module.exports = {
         // new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({
             title: "Zen App",
-            // inject: false,
             template: path.resolve("public", "index.html"),
-            // filename: 'index.[contenthash].html',
-            minify: true,
+            minify: false,
             meta: {
                 viewport: "viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
                 "theme-color": "#fff",
-                // "Content-Security-Policy": { 
-                //     "http-equiv": "Content-Security-Policy",
-                //     content: "default-src https:"
-                // },
-                // "set-cookie": { 
-                //     "http-equiv": "set-cookie", 
-                //     content: "name=value; expires=date; path=url" 
-                // },
-                // Will generate: <meta http-equiv="set-cookie" content="value; expires=date; path=url">
-                // Which equals to the following http header: `set-cookie: value; expires=date; path=url`
             }
         }),
+        new InterpolateHtmlPlugin(
+            HtmlWebpackPlugin, { VALUE: null }
+        ),
         new CopyWebpackPlugin({
             patterns: [
                 {

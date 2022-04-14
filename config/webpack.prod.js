@@ -76,14 +76,7 @@ module.exports = merge(common, {
                         }
                     }
                 ],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|ttf|eot)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'public/[name][ext]',
-                }
-            },
+            }
         ]
     },
     optimization: {
