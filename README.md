@@ -4,7 +4,17 @@
 
 This project aims to contain have latest updates from all dependencies to be secure and prevent any warning on actions or npm/yarn log messages.
 
-## Folder Structure
+## Install
+
+Final build will be compiled into [preact](https://preactjs.com/) and [@babel/runtime](https://babeljs.io/docs/en/babel-runtime) will optimize re-use of classes in runtime. So:
+``` yarn add preact @babel/runtime ```
+``` npm install preact @babel/runtime ```
+
+then you're ready to go:
+``` yarn add -D fatihgozenc/zen-react-scripts ```
+``` npm install -D fatihgozenc/zen-react-scripts ```
+
+#### Folder Structure
 
 ```
 my-app
@@ -24,7 +34,16 @@ my-app
     └── logo.svg
 ```
 
-## Available Commands
+#### Sample config for package.json
+```
+    "scripts": {
+        "dev": "yarn zen-react-scripts dev",
+        "build": "yarn zen-react-scripts build",
+        "local": "yarn zen-react-scripts local"
+    }
+```
+
+## Commands
 
 ### dev
 Starts project for development on `http://localhost:3000`.
