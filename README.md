@@ -4,13 +4,33 @@
 
 This project aims to contain have latest updates from all dependencies to be secure and prevent any warning on actions or npm/yarn log messages.
 
+## Folder Structure
+
+```
+my-app
+├── README.md
+├── node_modules
+├── package.json
+├── .gitignore
+├── .eslintrc.json
+├── public
+│   ├── manifest.json
+│   └── index.html
+└── src
+    ├── components/
+    ├── App.tsx
+    ├── preload.js
+    ├── index.js
+    └── logo.svg
+```
+
 ## Available Commands
 
 ### dev
 Starts project for development on `http://localhost:3000`.
 
 ### build
-Builds the react project for deployment.
+Builds the react project for deployment. Will be placed in `./build/`
 
 #### --hash
 Builds with a unique hash like `app.9dbf42.js`. If not specified it uses `[fullhash:8]` which is a common hash usage in webpack configs. More configurability will be added in future.
