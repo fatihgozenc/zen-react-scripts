@@ -41,6 +41,7 @@ my-app
         "build": "yarn zen-react-scripts build",
         "local": "yarn zen-react-scripts local"
     }
+    "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7"
 ```
 
 ## Commands
