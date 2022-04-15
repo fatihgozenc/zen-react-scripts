@@ -15,3 +15,6 @@ declare module '*.jpg' {
     // const content: React.FunctionComponent<React.SVGAttributes<SVGElement>>;
     export default content;
 }
+
+declare var classes: any;
+declare var css: any;

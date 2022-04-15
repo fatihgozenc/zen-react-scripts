@@ -23,4 +23,5 @@ function startScript({ name, args }) {
     const scriptPath = path.resolve(__dirname, "../", "scripts", name);
     const script = spawn('node', [scriptPath, ...args]);
     script.stdout.pipe(process.stdout);
+    script.stderr.pipe(process.stderr);
 }
