@@ -18,10 +18,6 @@ const hash = isHash ? crypto.randomBytes(3).toString("hex") : "[fullhash:8]";
 module.exports = merge(common, {
     mode: "production",
     devtool: false,
-    entry: {
-        preload: path.resolve("src", "preload.js"),
-        app: path.resolve("src", "index.js"),
-    },
     devServer: {
         hot: true,
     },

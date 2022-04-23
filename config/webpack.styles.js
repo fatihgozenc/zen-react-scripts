@@ -1,6 +1,6 @@
-const path = require("path")
-const globalCssModulePath =  path.resolve("src","styles", "globals", "globals.module.scss")
-const globalUtilitiesPath = path.resolve("config", "webpack.globals.js")
+const path = require("path");
+const globalCssModulePath = path.resolve(__dirname, "globals", "globals.module.scss");
+const globalUtilitiesPath = path.resolve(__dirname, "webpack.globals.js");
 
 module.exports = {
     cssLoaderModule: {
@@ -37,4 +37,4 @@ module.exports = {
         css: [globalCssModulePath, "default"],
         classes: [globalUtilitiesPath, "classes"]
     }
-}
+};

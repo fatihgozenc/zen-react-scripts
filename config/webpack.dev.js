@@ -1,8 +1,8 @@
-const webpack = require("webpack")
-const { merge } = require('webpack-merge')
-const common = require('./webpack.common.js')
-const ESLintPlugin = require('eslint-webpack-plugin')
-const styleConfig = require("./webpack.styles")
+const webpack = require("webpack");
+const { merge } = require('webpack-merge');
+const common = require('./webpack.common.js');
+const ESLintPlugin = require('eslint-webpack-plugin');
+const styleConfig = require("./webpack.styles");
 
 module.exports = merge(common, {
     mode: "development",
@@ -51,4 +51,4 @@ module.exports = merge(common, {
             fix: process.argv.includes("--fix") ? true : true
         })
     ]
-})
+});

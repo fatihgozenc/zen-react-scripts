@@ -4,12 +4,17 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("@gozenc/interpolate-html-plugin");
+const { existsSync } = require("fs");
+
+const appPath = path.resolve("src", "index.js");
+const preloadPath = path.resolve("src", "preload.js");
+
+const entryPoints = existsSync(preloadPath)
+    ? { preload: preloadPath, app: appPath, }
+    : { app: appPath, };
 
 module.exports = {
-    entry: {
-        app: path.resolve("src", "index.js"),
-        preload: path.resolve("src", "preload.js"),
-    },
+    entry: entryPoints,
     target: "browserslist",
     output: {
         path: path.resolve("build"),
