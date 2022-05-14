@@ -1,24 +1,25 @@
 import React from "react";
 import logo from './logo.svg';
 import "./styles/main.scss";
+// import "./style.css";
 
 function App(): React.ReactElement {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p className={classes(css.dFlex)}>
-                    Edit <code>src/App.tsx</code> and save to reload.
+        <div className="flex flex-col w-full h-screen justify-center items-center bg-gray-700">
+                <img src={logo} className="app-logo" alt="logo" />
+                <p className="flex text-white">
+                    Edit <code className="mx-2"> src/App.tsx </code> and save to reload.
                 </p>
                 <a
-                    className="App-link"
+                    className="text-cyan-500"
                     href="https://reactjs.org"
                     target="_blank"
                     rel="noopener noreferrer"
                 >
                     Learn React
                 </a>
-            </header>
+                <h5 className="bg-gradient-to-r from-cyan-500 to-blue-100 text-transparent text-sm bg-clip-text font-bold">created with Create Zen App</h5>
+
         </div>
     );
 }

@@ -63,6 +63,14 @@ module.exports = merge(common, {
                     },
                     styleConfig.cssLoaderDefault,
                     {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                config: path.resolve(__dirname, "postcss.config.js"),
+                            },
+                        }
+                    },
+                    {
                         loader: "sass-loader",
                         options: {
                             sourceMap: true,

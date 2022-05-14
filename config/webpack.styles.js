@@ -17,7 +17,7 @@ module.exports = {
     cssLoaderModuleDev: {
         loader: "css-loader",
         options: {
-            importLoaders: 1,
+            importLoaders: 2,
             sourceMap: true,
             url: false,
             modules: {
@@ -28,7 +28,7 @@ module.exports = {
     cssLoaderDefault: {
         loader: "css-loader",
         options: {
-            importLoaders: 1,
+            importLoaders: 2,
             sourceMap: true,
             url: false,
         }

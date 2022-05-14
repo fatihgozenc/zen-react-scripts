@@ -3,6 +3,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const styleConfig = require("./webpack.styles");
+const path = require("path");
 
 module.exports = merge(common, {
     mode: "development",
@@ -35,6 +36,14 @@ module.exports = merge(common, {
                 use: [
                     "style-loader", // Creates `style` nodes from JS strings
                     styleConfig.cssLoaderDefault,
+                    {
+                        loader: "postcss-loader",
+                        options: {
+                            postcssOptions: {
+                                config: path.resolve(__dirname, "postcss.config.js"),
+                            },
+                        }
+                    },
                     "sass-loader"   // Compiles Sass to CSS
                 ],
             }
