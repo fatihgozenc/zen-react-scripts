@@ -3,7 +3,7 @@
 
 const args = process.argv.slice(2);
 
-if(!args[0]) {
+if (!args[0]) {
     process.stdout.write("You need to provide a command: build, dev, local, analyze");
     process.exit(1);
 }
@@ -11,11 +11,13 @@ if(!args[0]) {
 const { spawn } = require('child_process');
 const path = require("path");
 
-if(args[0] === "build") {
+if (args[0] === "build") {
     startScript({ name: args[0], args: args.slice(1) });
-} else if(args[0] === "dev") {
+} else if (args[0] === "dev") {
     startScript({ name: args[0], args: args.slice(1) });
-} else if(args[0] === "local") {
+} else if (args[0] === "local") {
+    startScript({ name: args[0], args: args.slice(1) });
+} else if (args[0] === "start") {
     startScript({ name: args[0], args: args.slice(1) });
 }
 
