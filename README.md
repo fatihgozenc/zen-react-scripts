@@ -52,6 +52,12 @@ Starts project for development on `http://localhost:3000`.
 ### build
 Builds the react project for deployment. Will be placed in `./build/`
 
+### start
+Starts built project for production on `http://localhost:3001`.
+
+### local
+Builds the project and starts an instance on `http://localhost:3001`
+
 #### --hash
 Builds with a unique hash like `app.9dbf42.js`. If not specified it uses `[fullhash:8]` which is a common hash usage in webpack configs. More configurability will be added in future.
 
@@ -61,5 +67,3 @@ Builds and creates a report on `http://localhost:3002`
 <!-- ####--obfuscate
 Obfuscates all JS code with hexes. -->
 
-### local
-Builds the project and runs an instance on `http://localhost:3001`

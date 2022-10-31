@@ -14,7 +14,8 @@
     "scripts": {
         "build": "node scripts/build",
         "dev": "node scripts/dev",
-        "test": "node scripts/test"
+        "local": "node scripts/local",
+        "start": "node scripts/start"
     },
     "bin": {
         "zen-react-scripts": "./bin/zen-react-scripts.js"
