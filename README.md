@@ -11,8 +11,8 @@ Final build will be compiled into [preact](https://preactjs.com/) and [@babel/ru
 ``` npm install preact @babel/runtime ```
 
 then you're ready to go:
-``` yarn add -D fatihgozenc/zen-react-scripts ```
-``` npm install -D fatihgozenc/zen-react-scripts ```
+``` yarn add -D zen-react-scripts ```
+``` npm install -D zen-react-scripts ```
 
 #### Folder Structure
 
