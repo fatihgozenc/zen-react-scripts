@@ -8,9 +8,9 @@
         "url": "https://github.com/fatihgozenc/zen-react-scripts.git",
         "directory": "packages/zen-react-scripts",
         "bugs": {
-            "url": "https://github.com/fatihgozenc/animpure/issues"
+            "url": "https://github.com/fatihgozenc/zen-react-scripts/issues"
         },
-        "homepage": "https://github.com/fatihgozenc/animpure#readme"
+        "homepage": "https://github.com/fatihgozenc/zen-react-scripts#readme"
     },
     "keywords": [
         "react-scripts",
