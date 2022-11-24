@@ -6,8 +6,20 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/fatihgozenc/zen-react-scripts.git",
-        "directory": "packages/zen-react-scripts"
+        "directory": "packages/zen-react-scripts",
+        "bugs": {
+            "url": "https://github.com/fatihgozenc/animpure/issues"
+        },
+        "homepage": "https://github.com/fatihgozenc/animpure#readme"
     },
+    "keywords": [
+        "react-scripts",
+        "preact",
+        "typescript",
+        "boilerplate",
+        "create-react-app",
+        "react"
+    ],
     "engines": {
         "node": ">=14.0.0"
     },
