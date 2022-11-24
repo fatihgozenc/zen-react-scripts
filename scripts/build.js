@@ -16,10 +16,10 @@ const compiler = webpack(isAnalyze ? analyzeConfig : prodConfig);
 
 compiler.run(async (err, stats) => {
     console.log("compiler::exit");
-    if(err) {
+    if (err) {
         console.log("compiler.err.stack");
         console.log(err.stack || err);
-        if(err.details) {
+        if (err.details) {
             console.log("compiler.err.details");
             console.log(err);
             console.log(err.details);
@@ -27,12 +27,12 @@ compiler.run(async (err, stats) => {
         process.exit(1);
     }
     const info = stats.toJson();
-    if(stats.hasErrors()) {
+    if (stats.hasErrors()) {
         console.log("compiler.stats.hasErrors");
         info.errors.forEach(err => console.log(err.message));
         process.exit(1);
     }
-    if(stats.hasWarnings()) {
+    if (stats.hasWarnings()) {
         console.log("compiler.stats.hasWarnings");
         info.warnings.forEach(warning => console.log(warning.message));
     }
@@ -68,7 +68,7 @@ compiler.run(async (err, stats) => {
         console.log(`[${i + 1}]\t${sizeWithColor}\t${assetPath}`);
     });
     const licenseFiles = await fg(['build/*LICENSE*', 'build/static/js/*LICENSE*', 'build/static/js/deps/*LICENSE*']);
-    if(licenseFiles) {
+    if (licenseFiles) {
         await Promise.all(licenseFiles.map(async f => await unlink(f)));
     }
     process.stdout.write(`\n`);
