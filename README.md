@@ -4,6 +4,8 @@
 
 This project aims to contain have latest updates from all dependencies to be secure and prevent any warning on actions or npm/yarn log messages.
 
+Also you're able to use Web Workers with TypeScript with this.
+
 ## Install
 
 Final build will be compiled into [preact](https://preactjs.com/) and [@babel/runtime](https://babeljs.io/docs/en/babel-runtime) will optimize re-use of classes in runtime. So:
@@ -64,6 +66,22 @@ Builds with a unique hash like `app.9dbf42.js`. If not specified it uses `[fullh
 #### --analyze
 Builds and creates a report on `http://localhost:3002`
 
-<!-- ####--obfuscate
-Obfuscates all JS code with hexes. -->
+## Web Workers with React
 
+Now you can start using Web Workers! Two things are important here: Files that contain a Web Worker must end with `*.worker.ts`, and they
+must start with the following two lines of code in order to work nicely together with TypeScript:
+
+```ts
+declare const self: DedicatedWorkerGlobalScope;
+export default {} as typeof Worker & { new (): Worker };
+
+// Your code ...
+```
+
+In your application, you can import your Web Workers like a normal module, and instantiate them as a class. For example:
+
+```ts
+import MyWorker from './MyWorker.worker';
+
+const myWorkerInstance: Worker = new MyWorker();
+```

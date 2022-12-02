@@ -2,6 +2,7 @@
     "compilerOptions": {
         "outDir": "./build",
         "moduleResolution": "node",
+        "lib": ["dom", "dom.iterable", "esnext", "WebWorker"],
         "target": "es5",
         "module": "es6",
         "jsx": "react",

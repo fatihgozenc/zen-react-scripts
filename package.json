@@ -1,6 +1,6 @@
 {
     "name": "zen-react-scripts",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "author": "Fatih Gozenc <fatihgozenc@gmail.com>",
     "license": "MIT",
     "repository": {
@@ -90,5 +90,8 @@
         "webpack-obfuscator": "^3.5.1",
         "workbox-webpack-plugin": "^6.5.4"
     },
-    "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7"
+    "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7",
+    "devDependencies": {
+        "worker-loader": "^3.0.8"
+    }
 }
