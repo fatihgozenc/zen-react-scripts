@@ -4,6 +4,7 @@ const common = require('./webpack.common.js');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const styleConfig = require("./webpack.styles");
 const path = require("path");
+const { existsSync } = require('fs');
 
 const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`
 let userDefinedConfig = {};
