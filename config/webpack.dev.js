@@ -5,6 +5,13 @@ const ESLintPlugin = require('eslint-webpack-plugin');
 const styleConfig = require("./webpack.styles");
 const path = require("path");
 
+const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`
+let userDefinedConfig = {};
+if (existsSync(userDefinedConfigFilePath)) {
+    userDefinedConfig = require(userDefinedConfigFilePath);
+    userDefinedConfig = userDefinedConfig.development ?? {};
+}
+
 module.exports = merge(common, {
     mode: "development",
     devtool: "source-map",
@@ -60,4 +67,4 @@ module.exports = merge(common, {
             fix: process.argv.includes("--fix") ? true : true
         })
     ]
-});
+}, userDefinedConfig);

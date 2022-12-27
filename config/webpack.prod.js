@@ -5,15 +5,22 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+const { existsSync } = require('fs');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require("path");
 const styleConfig = require("./webpack.styles");
 const crypto = require("crypto");
-
 const isAnalyze = process.argv.includes("--analyze");
 const isHash = process.argv.includes("--hash");
 const hash = isHash ? crypto.randomBytes(3).toString("hex") : "[fullhash:8]";
+
+const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`
+let userDefinedConfig = {};
+if (existsSync(userDefinedConfigFilePath)) {
+    userDefinedConfig = require(userDefinedConfigFilePath);
+    userDefinedConfig = userDefinedConfig.production ?? {};
+}
 
 module.exports = merge(common, {
     mode: "production",
@@ -146,7 +153,7 @@ module.exports = merge(common, {
             reportFilename: "./report.html"
         })
     ] : getPlugins()
-});
+}, userDefinedConfig);
 
 function getPlugins() {
     return [

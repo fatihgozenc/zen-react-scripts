@@ -66,6 +66,24 @@ Builds with a unique hash like `app.9dbf42.js`. If not specified it uses `[fullh
 #### --analyze
 Builds and creates a report on `http://localhost:3002`
 
+
+## Custom Webpack Configuration
+
+You can overwrite the custom configuration of your app via placing `webpack.config.js` in your project root. Webpack configurations can passed inside `production` and `development` keys in object.
+```js
+module.exports = {
+  production: {
+    output: {
+      publicPath: "/yourDesiredPath/",
+    },
+  },
+  development: {
+    devtool: "source-map",
+  }
+};
+
+```
+
 ## Web Workers with React
 
 Now you can start using Web Workers! Two things are important here: Files that contain a Web Worker must end with `*.worker.ts`, and they
