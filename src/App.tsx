@@ -3,8 +3,6 @@ import logo from "./logo.svg";
 import "./styles/main.scss";
 import AuditWorker from "./Audit.worker";
 
-// import "./style.css";
-
 function App(): React.ReactElement {
   React.useEffect(() => {
     const w = new AuditWorker();
@@ -18,7 +16,7 @@ function App(): React.ReactElement {
       </p>
       <a
         className="text-cyan-500"
-        href="https://reactjs.org"
+        href={process.env["fatih"]}
         target="_blank"
         rel="noopener noreferrer"
       >

@@ -1,6 +1,6 @@
 {
     "name": "zen-react-scripts",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "author": "Fatih Gozenc <fatihgozenc@gmail.com>",
     "license": "MIT",
     "repository": {
@@ -50,6 +50,7 @@
         "@babel/runtime": "^7.17.9",
         "@gozenc/interpolate-html-plugin": "^1.0.2",
         "@types/react": "^18.0.27",
+        "@types/react-dom": "^18.0.10",
         "autoprefixer": "^10.4.13",
         "babel-loader": "^9.1.2",
         "babel-plugin-inline-react-svg": "^2.0.1",

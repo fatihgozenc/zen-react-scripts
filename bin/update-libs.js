@@ -13,18 +13,18 @@ const ddeps = package.devDependencies
 execute(`npm remove ${ddeps}`)
     .then(() => {
         console.log("Deleted ddeps.");
-        return execute(`npm install ${deps}`);
+        return execute(`npm remove ${deps}`);
     })
     .then(() => {
         console.log("Deleted deps.");
         if (!ddeps) {
             process.exit(0);
         }
-        return execute(`npm remove ${ddeps}`);
+        return execute(`npm i ${deps}`);
     })
     .then(() => {
         console.log("Re-Installed deps.");
-        return execute(`npm install -D ${ddeps}`);
+        return execute(`npm i -D ${ddeps}`);
     })
     .then(() => {
         console.log("Re-Installed ddeps.");
