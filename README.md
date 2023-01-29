@@ -9,14 +9,23 @@ Also you're able to use Web Workers with TypeScript with this.
 ## Install
 
 Final build will be compiled into [preact](https://preactjs.com/) and [@babel/runtime](https://babeljs.io/docs/en/babel-runtime) will optimize re-use of classes in runtime. So:
-``` yarn add preact @babel/runtime ```
-``` npm install preact @babel/runtime ```
+``` 
+yarn add preact @babel/runtime 
+```
+``` 
+npm i preact @babel/runtime 
+```
 
 then you're ready to go:
-``` yarn add -D zen-react-scripts ```
-``` npm install -D zen-react-scripts ```
+``` 
+yarn add -D zen-react-scripts 
+```
+```
+npm i -D zen-react-scripts
+```
+<br/>
 
-#### Folder Structure
+### Folder Structure
 
 ```
 my-app
@@ -35,13 +44,14 @@ my-app
     ├── index.js
     └── logo.svg
 ```
+<br/>
 
-#### Sample config for package.json
-```
+### Sample config for package.json
+```json
     "scripts": {
-        "dev": "yarn zen-react-scripts dev",
-        "build": "yarn zen-react-scripts build",
-        "local": "yarn zen-react-scripts local"
+        "dev": "zen-react-scripts dev",
+        "build": "zen-react-scripts build",
+        "local": "zen-react-scripts local"
     }
     "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7"
 ```
@@ -54,18 +64,36 @@ Starts project for development on `http://localhost:3000`.
 ### build
 Builds the react project for deployment. Will be placed in `./build/`
 
+### local
+Builds the project and starts an instance on `http://localhost:3001` via a basic `express` static server. Useful for checking the build on production environment.
+
 ### start
 Starts built project for production on `http://localhost:3001`.
 
-### local
-Builds the project and starts an instance on `http://localhost:3001`
-
 #### --hash
-Builds with a unique hash like `app.9dbf42.js`. If not specified it uses `[fullhash:8]` which is a common hash usage in webpack configs. More configurability will be added in future.
+Builds your app with a unique random hash like `app.9dbf42.js` in all of your assets. If not specified it uses `[contenthash:6]` which only changes when you change the content of the file.
+via NPM
+```
+npm run build -- --hash
+```
+via Yarn
+```
+yarn build --hash
+```
+<br/>
 
 #### --analyze
 Builds and creates a report on `http://localhost:3002`
 
+via NPM
+```
+npm run build -- --analyze
+```
+via Yarn
+```
+yarn build --analyze
+```
+<br/>
 
 ## Custom Webpack Configuration
 
@@ -81,8 +109,8 @@ module.exports = {
     devtool: "source-map",
   }
 };
-
 ```
+<br/>
 
 ## Web Workers with React
 
@@ -103,3 +131,26 @@ import MyWorker from './MyWorker.worker';
 
 const myWorkerInstance: Worker = new MyWorker();
 ```
+<br/>
+
+## Loading Custom Font Files
+Loading custom files via URL relies on relative paths in your file tree. An example with file tree is here:
+```scss
+// src/styles/main.scss
+@font-face {
+    font-family: "FFMark";
+    src: url("./fonts/ffmark.woff2");
+}
+```
+```
+
+└─ src
+  ├── components/
+  ├── styles/
+  │   ├── fonts/
+  │   │   └── ffmark.woff2
+  │   └── main.sscs
+  ├── App.tsx
+  └── index.js
+```
+<br/>

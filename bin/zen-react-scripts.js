@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 'use strict';
-
 const args = process.argv.slice(2);
 
 if (!args[0]) {
@@ -11,15 +10,7 @@ if (!args[0]) {
 const { spawn } = require('child_process');
 const path = require("path");
 
-if (args[0] === "build") {
-    startScript({ name: args[0], args: args.slice(1) });
-} else if (args[0] === "dev") {
-    startScript({ name: args[0], args: args.slice(1) });
-} else if (args[0] === "local") {
-    startScript({ name: args[0], args: args.slice(1) });
-} else if (args[0] === "start") {
-    startScript({ name: args[0], args: args.slice(1) });
-}
+startScript({ name: args[0], args: args.slice(1) });
 
 function startScript({ name, args }) {
     const scriptPath = path.resolve(__dirname, "../", "scripts", name);
@@ -27,3 +18,13 @@ function startScript({ name, args }) {
     script.stdout.pipe(process.stdout);
     script.stderr.pipe(process.stderr);
 }
+
+// if (args[0] === "build") {
+//     startScript({ name: args[0], args: args.slice(1) });
+// } else if (args[0] === "dev") {
+//     startScript({ name: args[0], args: args.slice(1) });
+// } else if (args[0] === "local") {
+//     startScript({ name: args[0], args: args.slice(1) });
+// } else if (args[0] === "start") {
+//     startScript({ name: args[0], args: args.slice(1) });
+// }

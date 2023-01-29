@@ -67,11 +67,29 @@ module.exports = {
                 }
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif|woff|woff2|ttf|eot)$/i,
+                test: /\.csv$/,
+                loader: 'csv-loader',
+                options: {
+                    dynamicTyping: true,
+                    header: true,
+                    skipEmptyLines: true
+                }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                type: "asset/resource",
+            },
+            {
+                test: /\.(woff|woff2|ttf|eot|otf)$/i,
                 type: "asset/resource",
                 generator: {
-                    filename: "public/[name][ext]",
+                    filename: `static/fonts/[name].${process.env["BUILD_HASH"]}[ext]`,
                 }
+            },
+            {
+                test: /\.svg$/,
+                type: 'asset/resource',
+                use: 'svgo-loader'
             },
         ]
     },
@@ -79,13 +97,8 @@ module.exports = {
         new Dotenv(),
         // new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({
-            title: "Zen App",
             template: path.resolve("public", "index.html"),
             minify: false,
-            meta: {
-                viewport: "viewport-fit=cover, initial-scale=1.0, maximum-scale=1.0, user-scalable=no",
-                "theme-color": "#fff",
-            }
         }),
         new InterpolateHtmlPlugin(
             HtmlWebpackPlugin, { VALUE: null }
@@ -94,7 +107,7 @@ module.exports = {
             patterns: [
                 {
                     from: "./public",
-                    to: "./public",
+                    to: "./",
                     globOptions: {
                         ignore: [
                             "**/*.html",

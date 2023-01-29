@@ -1,6 +1,12 @@
 #!/usr/bin/env node
 const webpack = require('webpack');
 const chalk = require("chalk");
+const crypto = require("crypto");
+const buildHash = crypto.randomBytes(3).toString("hex");
+process.env["BUILD_HASH"] = process.argv.includes("--hash") ? buildHash : "[contenthash:6]";
+process.env["NODE_ENV"] = "production";
+
+console.log(process.argv, process.env["BUILD_HASH"]);
 const prodConfig = require("../config/webpack.prod");
 const analyzeConfig = require("../config/webpack.analyze");
 const prettyBytes = require('pretty-bytes');
@@ -9,7 +15,6 @@ const sizeThresholdAlert = 220000;
 const fg = require('fast-glob');
 const { unlink } = require("fs/promises");
 
-process.env["NODE_ENV"] = "production";
 const isAnalyze = process.argv.includes("--analyze");
 
 const compiler = webpack(isAnalyze ? analyzeConfig : prodConfig);

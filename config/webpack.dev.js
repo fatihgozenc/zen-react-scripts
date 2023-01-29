@@ -6,7 +6,7 @@ const styleConfig = require("./webpack.styles");
 const path = require("path");
 const { existsSync } = require('fs');
 
-const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`
+const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`;
 let userDefinedConfig = {};
 if (existsSync(userDefinedConfigFilePath)) {
     userDefinedConfig = require(userDefinedConfigFilePath);
@@ -65,7 +65,7 @@ module.exports = merge(common, {
         }),
         new ESLintPlugin({
             context: "./src",
-            fix: process.argv.includes("--fix") ? true : true
+            fix: process.argv.includes("--fix") ? true : false
         })
     ]
 }, userDefinedConfig);

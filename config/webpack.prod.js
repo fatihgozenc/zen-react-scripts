@@ -1,5 +1,4 @@
-const WebpackObfuscator = require('webpack-obfuscator');
-const WorkboxPlugin = require('workbox-webpack-plugin');
+// const WorkboxPlugin = require('workbox-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -10,13 +9,11 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require("path");
 const styleConfig = require("./webpack.styles");
-const crypto = require("crypto");
 const isAnalyze = process.argv.includes("--analyze");
-const isHash = process.argv.includes("--hash");
-const hash = isHash ? crypto.randomBytes(3).toString("hex") : "[fullhash:8]";
 
-const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`
+const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`;
 let userDefinedConfig = {};
+
 if (existsSync(userDefinedConfigFilePath)) {
     userDefinedConfig = require(userDefinedConfigFilePath);
     userDefinedConfig = userDefinedConfig.production ?? {};
@@ -25,13 +22,11 @@ if (existsSync(userDefinedConfigFilePath)) {
 module.exports = merge(common, {
     mode: "production",
     devtool: false,
-    devServer: {
-        hot: true,
-    },
     output: {
         clean: true,
-        filename: `static/js/[name].${hash}.js`,
-        chunkFilename: `static/js/[name].${hash}.chunk.js`,
+        filename: `static/js/[name].${process.env["BUILD_HASH"]}.js`,
+        chunkFilename: `static/js/[name].${process.env["BUILD_HASH"]}.chunk.js`,
+        assetModuleFilename: `static/assets/[name].${process.env["BUILD_HASH"]}[ext]`
     },
     resolve: {
         alias: {
@@ -162,8 +157,8 @@ function getPlugins() {
             linkType: "text/css",
             // filename: "[name].[fullhash].css",
             // chunkFilename: "[id].[fullhash].css",
-            filename: `static/css/[name].${hash}.css`,
-            chunkFilename: `static/css/[name].${hash}.chunk.css`,
+            filename: `static/css/[name].${process.env["BUILD_HASH"]}.css`,
+            chunkFilename: `static/css/[name].${process.env["BUILD_HASH"]}.chunk.css`,
         }),
         new webpack.ProvidePlugin({
             ...styleConfig.cssGlobalProviders,
@@ -173,9 +168,6 @@ function getPlugins() {
         new webpack.ids.DeterministicModuleIdsPlugin({
             maxLength: 5,
         }),
-        // new WebpackObfuscator({
-        //     rotateStringArray: true
-        // })
         // new WorkboxPlugin.GenerateSW({
         //     // these options encourage the ServiceWorkers to get in there fast
         //     // and not allow any straggling "old" SWs to hang around

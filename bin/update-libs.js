@@ -2,10 +2,15 @@ const package = require("../package.json");
 const { exec } = require('child_process');
 
 const ignoredLibs = ["chalk", "pretty-bytes"];
-const deps = package.dependencies ? Object.keys(package.dependencies).filter(e => !ignoredLibs.includes(e)).join(" ") : null;
-const ddeps = package.devDependencies ? Object.keys(package.devDependencies).filter(e => !ignoredLibs.includes(e)).join(" ") : null;
 
-execute(`npm remove ${deps}`)
+const deps = package.dependencies
+    ? Object.keys(package.dependencies).filter(e => !ignoredLibs.includes(e)).join(" ")
+    : null;
+const ddeps = package.devDependencies
+    ? Object.keys(package.devDependencies).filter(e => !ignoredLibs.includes(e)).join(" ")
+    : null;
+
+execute(`npm remove ${ddeps}`)
     .then(() => {
         console.log("Deleted ddeps.");
         return execute(`npm install ${deps}`);

@@ -8,7 +8,6 @@ module.exports = {
         options: {
             importLoaders: 1,
             sourceMap: true,
-            url: false,
             modules: {
                 localIdentName: '[sha1:hash:hex:5]'
             }
@@ -19,7 +18,6 @@ module.exports = {
         options: {
             importLoaders: 2,
             sourceMap: true,
-            url: false,
             modules: {
                 localIdentName: "[name]__[local]",
             }
@@ -30,7 +28,6 @@ module.exports = {
         options: {
             importLoaders: 2,
             sourceMap: true,
-            url: false,
         }
     },
     cssGlobalProviders: {
