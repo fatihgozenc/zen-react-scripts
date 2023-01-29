@@ -3,15 +3,6 @@
     pointer-events: none;
 }
 
-@font-face {
-    font-family: "FFMark";
-    src: url("./fonts/ffmark.woff2");
-}
-
-body {
-    font-family: "FFMark";
-}
-
 @media (prefers-reduced-motion: no-preference) {
     .app-logo {
         animation: app-logo-float infinite 10s linear;

@@ -5,8 +5,6 @@ const crypto = require("crypto");
 const buildHash = crypto.randomBytes(3).toString("hex");
 process.env["BUILD_HASH"] = process.argv.includes("--hash") ? buildHash : "[contenthash:6]";
 process.env["NODE_ENV"] = "production";
-
-console.log(process.argv, process.env["BUILD_HASH"]);
 const prodConfig = require("../config/webpack.prod");
 const analyzeConfig = require("../config/webpack.analyze");
 const prettyBytes = require('pretty-bytes');

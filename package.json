@@ -1,6 +1,6 @@
 {
     "name": "zen-react-scripts",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "author": "Fatih Gozenc <fatihgozenc@gmail.com>",
     "license": "MIT",
     "repository": {
@@ -41,7 +41,7 @@
         "@babel/runtime": "^7.17.9",
         "preact": "^10.11.3"
     },
-    "devDependencies": {
+    "dependencies": {
         "@babel/core": "^7.20.12",
         "@babel/plugin-transform-runtime": "^7.19.6",
         "@babel/preset-env": "^7.20.2",
