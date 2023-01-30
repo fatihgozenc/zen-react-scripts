@@ -1,6 +1,6 @@
 {
     "name": "zen-react-scripts",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "author": "Fatih Gozenc <fatihgozenc@gmail.com>",
     "license": "MIT",
     "repository": {
@@ -34,6 +34,7 @@
     "bin": {
         "zen-react-scripts": "./bin/zen-react-scripts.js"
     },
+    "types": "./lib/zen-app.d.ts",
     "bugs": {
         "url": "https://github.com/fatihgozenc/zen-react-scripts/issues"
     },
