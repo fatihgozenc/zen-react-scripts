@@ -1,5 +1,4 @@
 const storageKey = "theme-preference";
-console.log("FIRST LOAD?");
 window.theme = {
     value: getColorPreference(),
     setTheme: setTheme

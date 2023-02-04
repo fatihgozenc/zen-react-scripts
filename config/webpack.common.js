@@ -1,4 +1,5 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
@@ -6,7 +7,7 @@ const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("@gozenc/interpolate-html-plugin");
 const { existsSync } = require("fs");
 
-const appPath = path.resolve("src", "index.js");
+const appPath = path.resolve("src", "index.tsx");
 const preloadPath = path.resolve("src", "preload.js");
 
 const entryPoints = existsSync(preloadPath)
@@ -41,16 +42,11 @@ module.exports = {
             {
                 test: /\.(worker)\.ts$/,
                 use: 'worker-loader',
-                exclude: /node_modules/,
+                exclude: /(node_modules|bower_components)/,
             },
             {
-                test: /\.(tsx|ts)?$/,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
+                test: /\.(ts|js)x?$/,
+                exclude: /(node_modules|bower_components)/,
                 include: path.resolve("src"),
                 use: {
                     loader: "babel-loader",
@@ -59,7 +55,11 @@ module.exports = {
                             /node_modules[\\\/]core-js/,
                             /node_modules[\\\/]webpack[\\\/]buildin/,
                         ],
-                        presets: ["@babel/preset-react"],
+                        presets: [
+                            "@babel/preset-env",
+                            "@babel/preset-react",
+                            "@babel/preset-typescript",
+                        ],
                         plugins: [
                             "@babel/plugin-transform-runtime"
                         ]
@@ -116,8 +116,12 @@ module.exports = {
                 }
             ],
         }),
+        new webpack.IgnorePlugin({
+            resourceRegExp: /^\.\/locale$/,
+            contextRegExp: /moment$/,
+          }),
         new WebpackManifestPlugin({
-            fileName: "assets.json"
+            fileName: "asset-manifest.json"
         }),
     ]
 };
