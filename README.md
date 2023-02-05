@@ -34,6 +34,7 @@ my-app
 ├── package.json
 ├── .gitignore
 ├── .eslintrc.json
+├── .env
 ├── public
 │   ├── manifest.json
 │   └── index.html
@@ -55,6 +56,9 @@ my-app
     }
     "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7"
 ```
+
+## Environment Files
+By default `.env` file will be checked for environment variables. If you place `.env.production` or `.env.development`, these files will overwrite default `.env` file that you've placed before.
 
 ## Commands
 

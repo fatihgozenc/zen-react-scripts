@@ -8,7 +8,7 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
 const path = require("path");
 const styleConfig = require("./webpack.styles");
-const isAnalyze = process.argv.includes("--analyze");
+const Dotenv = require("dotenv-webpack");
 
 const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`;
 let userDefinedConfig = {};
@@ -138,24 +138,19 @@ module.exports = merge(common, {
             new CssMinimizerPlugin(),
         ]
     },
-    plugins: isAnalyze ? [
-        ...getPlugins(),
-        new webpack.ProgressPlugin(),
-        new BundleAnalyzerPlugin({
-            analyzerHost: "localhost",
-            analyzerPort: 3002,
-            reportFilename: "./report.html"
-        })
-    ] : getPlugins()
+    plugins: getProductionPlugins()
 }, userDefinedConfig);
 
-function getPlugins() {
-    return [
+function getProductionPlugins() {
+
+    const isAnalyze = process.argv.includes("--analyze");
+    const prodEnvFilePath = `${process.cwd()}/.env.production`;
+    const hasProdEnvFile = existsSync(prodEnvFilePath);
+
+    const plugins = [
         new MiniCssExtractPlugin({
             ignoreOrder: true,
             linkType: "text/css",
-            // filename: "[name].[fullhash].css",
-            // chunkFilename: "[id].[fullhash].css",
             filename: `static/css/[name].${process.env["BUILD_HASH"]}.css`,
             chunkFilename: `static/css/[name].${process.env["BUILD_HASH"]}.chunk.css`,
         }),
@@ -174,4 +169,25 @@ function getPlugins() {
         //     skipWaiting: true,
         // }),
     ];
+
+    if (hasProdEnvFile) {
+        plugins.unshift(
+            new Dotenv({
+                path: prodEnvFilePath
+            }),
+        );
+    }
+
+    if (isAnalyze) {
+        plugins.push(
+            new webpack.ProgressPlugin(),
+            new BundleAnalyzerPlugin({
+                analyzerHost: "localhost",
+                analyzerPort: 3002,
+                reportFilename: "./report.html"
+            })
+        )
+    }
+
+    return plugins;
 }

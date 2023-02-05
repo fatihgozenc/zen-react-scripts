@@ -1,12 +1,12 @@
 const webpack = require("webpack");
 const { merge } = require('webpack-merge');
+const Dotenv = require("dotenv-webpack");
 const common = require('./webpack.common.js');
 const ESLintPlugin = require('eslint-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const styleConfig = require("./webpack.styles");
 const path = require("path");
 const resolve = require('resolve');
-
 const { existsSync } = require('fs');
 
 const userDefinedConfigFilePath = `${process.cwd()}/webpack.config.js`;
@@ -60,7 +60,21 @@ module.exports = merge(common, {
             }
         ]
     },
-    plugins: [
+    plugins: getDevelopmentPlugins(),
+    watchOptions: {
+        // for some systems, watching many files can result in a lot of CPU or memory usage
+        // https://webpack.js.org/configuration/watch/#watchoptionsignored
+        // don't use this pattern, if you have a monorepo with linked packages
+        ignored: /node_modules/,
+    },
+}, userDefinedConfig);
+
+function getDevelopmentPlugins() {
+
+    const devEnvFilePath = `${process.cwd()}/.env.development`;
+    const hasProdEnvFile = existsSync(devEnvFilePath);
+
+    const plugins = [
         new webpack.ProvidePlugin({
             ...styleConfig.cssGlobalProviders,
             React: 'react',
@@ -85,11 +99,15 @@ module.exports = merge(common, {
             context: "./src",
             fix: process.argv.includes("--fix") ? true : false
         })
-    ],
-    watchOptions: {
-        // for some systems, watching many files can result in a lot of CPU or memory usage
-        // https://webpack.js.org/configuration/watch/#watchoptionsignored
-        // don't use this pattern, if you have a monorepo with linked packages
-        ignored: /node_modules/,
-    },
-}, userDefinedConfig);
+    ];
+
+    if (hasProdEnvFile) {
+        plugins.unshift(
+            new Dotenv({
+                path: devEnvFilePath
+            }),
+        );
+    }
+
+    return plugins;
+}
