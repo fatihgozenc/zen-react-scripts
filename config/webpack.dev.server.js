@@ -2,7 +2,8 @@ module.exports = {
     compress: true,
     hot: true,
     liveReload: false,
-    open: true,
+    open: (process.argv.includes("--silent") 
+    || process.argv.includes("-s")) ? false : true,
     port: 3000,
     client: {
         overlay: true

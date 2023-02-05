@@ -59,7 +59,10 @@ my-app
 ## Commands
 
 ### dev
-Starts project for development on `http://localhost:3000`.
+Starts project for development on `http://localhost:3000` and opens a tab in your default browser.
+
+#### --silent or -s
+Starts development server in the background, without creating a tab or opening the browser. Useful for testing.
 
 ### build
 Builds the react project for deployment. Will be placed in `./build/`
