@@ -69,20 +69,11 @@ module.exports = merge(common, {
         new ForkTsCheckerWebpackPlugin({
             async: true,
             typescript: {
+                configFile: "./tsconfig.json",
               typescriptPath: resolve.sync('typescript', {
                 basedir: "node_modules",
               }),
-              configOverwrite: {
-                compilerOptions: {
-                  sourceMap: true,
-                  skipLibCheck: true,
-                  inlineSourceMap: false,
-                  declarationMap: false,
-                  noEmit: true,
-                  incremental: true,
-                },
-              },
-              context: "./src",
+              context: ".",
               diagnosticOptions: {
                 syntactic: true,
               },
