@@ -3,5 +3,5 @@ node_modules
 build
 src
 tsconfig.json
-./webpack.config.json
-./tailwind.config.json
+webpack.config.json
+tailwind.config.json
