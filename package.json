@@ -1,6 +1,6 @@
 {
     "name": "zen-react-scripts",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "author": "Fatih Gozenc <fatihgozenc@gmail.com>",
     "license": "MIT",
     "repository": {
@@ -93,7 +93,6 @@
         "webpack-hot-middleware": "^2.25.3",
         "webpack-manifest-plugin": "^5.0.0",
         "webpack-merge": "^5.8.0",
-        "workbox-webpack-plugin": "^6.5.4",
         "worker-loader": "^3.0.8"
     },
     "browserslist": "edge >= 13, firefox >= 50, and_ff >= 50, chrome >= 49, and_chr >= 49, ios >= 9.4, safari >= 9.4, samsung >= 5, and_uc >= 11.8, opera >= 40, op_mob >= 40, baidu >= 7"

@@ -1,5 +1,4 @@
 /// <reference types="node" />
-/// <reference types="typescript/lib/lib.webworker" />
 /// <reference types="typescript/lib/lib.dom" />
 /// <reference types="react" />
 /// <reference types="react-dom" />
