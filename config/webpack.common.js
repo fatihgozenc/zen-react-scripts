@@ -6,6 +6,7 @@ const Dotenv = require("dotenv-webpack");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("@gozenc/interpolate-html-plugin");
 const { existsSync, readFileSync } = require("fs");
+const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const appPath = path.resolve("src", "index.tsx");
 const tsConfigPath = path.resolve("tsconfig.json");
@@ -52,6 +53,7 @@ module.exports = {
       ".jsx",
       ".json",
     ],
+    plugins: [new TsconfigPathsPlugin()],
   },
   module: {
     rules: [
