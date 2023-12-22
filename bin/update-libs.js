@@ -1,7 +1,8 @@
 const package = require("../package.json");
 const packageLock = require("../package-lock.json");
-const { exec } = require("child_process");
+const { spawn } = require("child_process");
 const fs = require("fs");
+const chalk = require("chalk");
 const ignoredLibs = ["chalk", "pretty-bytes"];
 const packageString = package.toString();
 const packageLockString = packageLock.toString();
@@ -11,18 +12,8 @@ const deps = package.dependencies
       .filter((e) => !ignoredLibs.includes(e))
       .join(" ")
   : null;
-const ddeps = package.devDependencies
-  ? Object.keys(package.devDependencies)
-      .filter((e) => !ignoredLibs.includes(e))
-      .join(" ")
-  : null;
 
-execute(`npm remove ${ddeps}`)
-  .then((out) => {
-    console.log(out);
-    console.log("Deleted ddeps.");
-    return execute(`npm remove ${deps}`);
-  })
+execute(`npm remove ${deps}`)
   .then((out) => {
     console.log(out);
     console.log("Deleted deps.");
@@ -31,11 +22,6 @@ execute(`npm remove ${ddeps}`)
   .then((out) => {
     console.log(out);
     console.log("Re-Installed deps.");
-    return execute(`npm i -D ${ddeps}`);
-  })
-  .then((out) => {
-    console.log(out);
-    console.log("Re-Installed ddeps.");
   })
   .catch((err) => {
     console.error(err);
@@ -45,9 +31,19 @@ execute(`npm remove ${ddeps}`)
 
 async function execute(command) {
   return new Promise((resolve, reject) => {
-    exec(command, (error, stdout) => {
-      if (error) reject(error);
-      resolve(stdout.trim());
+    const exe = spawn(command, { shell: true });
+    exe.stdout.on("data", (data) => {
+      process.stdout.write(chalk.green(data.toString()));
+    });
+    exe.stderr.on("data", (data) => {
+      process.stdout.write(chalk.yellow(data.toString()));
+    });
+    exe.on("close", (code) => {
+      if (code === 0) {
+        resolve("\n");
+      } else {
+        reject(`child process exited with code ${code}`);
+      }
     });
   });
 }
